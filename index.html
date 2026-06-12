@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Envio de Comprovante de Abastecimento</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --navy: #0a2a50;
+      --navy-hover: #083052;
+      --primary-blue: #0056b3;
+      --upload-border: #b8d4f0;
+      --upload-bg: #f0f7ff;
+      --page-bg: #f0f2f5;
+      --text-muted-custom: #6c757d;
+    }
+
+    body {
+      font-family: 'Poppins', system-ui, -apple-system, sans-serif;
+      background-color: var(--page-bg);
+      min-height: 100vh;
+    }
+
+    .page-header {
+      background-color: var(--navy);
+      color: #fff;
+      padding: 1.75rem 0;
+    }
+
+    .page-header .header-icon {
+      font-size: 2.25rem;
+      line-height: 1;
+      opacity: 0.95;
+      padding-left: 1rem;
+    }
+
+    .page-header h1 {
+      font-size: 1.75rem;
+      font-weight: 700;
+      margin-bottom: 0.25rem;
+    }
+
+    .form-card {
+      border: none;
+      border-radius: 12px;
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+      margin-top: -1rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .card-header-custom {
+      background: transparent;
+      border-bottom: 1px solid #e9ecef;
+      padding: 1.75rem 1.75rem 1.25rem;
+    }
+
+    .card-header-icon {
+      width: 48px;
+      height: 48px;
+      background-color: #e8f0fe;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--primary-blue);
+      font-size: 1.35rem;
+      flex-shrink: 0;
+    }
+
+    .card-header-custom h2 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 0.15rem;
+    }
+
+    .card-header-custom p {
+      font-size: 0.875rem;
+      color: var(--text-muted-custom);
+      margin-bottom: 0;
+    }
+
+    .card-body-custom {
+      padding: 1.75rem;
+    }
+
+    .form-label {
+      font-weight: 600;
+      font-size: 0.9rem;
+      color: #212529;
+      margin-bottom: 0.5rem;
+    }
+
+    .form-label .required {
+      color: #dc3545;
+    }
+
+    .input-group-custom .input-group-text {
+      background-color: #fff;
+      border-right: none;
+      color: #adb5bd;
+      padding-left: 0.875rem;
+      padding-right: 0.5rem;
+    }
+
+    .input-group-custom .form-control {
+      border-left: none;
+      padding-left: 0.25rem;
+    }
+
+    .input-group-custom .form-control:focus {
+      box-shadow: none;
+      border-color: #ced4da;
+    }
+
+    .input-group-custom:focus-within {
+      box-shadow: 0 0 0 0.2rem rgba(10, 42, 80, 0.15);
+      border-radius: 0.375rem;
+    }
+
+    .input-group-custom:focus-within .input-group-text,
+    .input-group-custom:focus-within .form-control {
+      border-color: #86b7fe;
+    }
+
+    .upload-area {
+      border: 2px dashed var(--upload-border);
+      border-radius: 8px;
+      background-color: var(--upload-bg);
+      padding: 2.5rem 1.5rem;
+      text-align: center;
+      cursor: pointer;
+      transition: background-color 0.2s, border-color 0.2s;
+    }
+
+    .upload-area:hover {
+      background-color: #e3effd;
+      border-color: #93c5fd;
+    }
+
+    .upload-area .upload-icon {
+      font-size: 2.5rem;
+      color: var(--primary-blue);
+      margin-bottom: 0.75rem;
+      display: block;
+    }
+
+    .upload-area .upload-link {
+      color: var(--primary-blue);
+      font-weight: 600;
+      font-size: 0.95rem;
+      text-decoration: none;
+    }
+
+    .upload-area .upload-link:hover {
+      text-decoration: underline;
+    }
+
+    .upload-area .upload-hint {
+      font-size: 0.8rem;
+      color: var(--text-muted-custom);
+      margin-top: 0.35rem;
+      margin-bottom: 0;
+    }
+
+    .upload-info {
+      font-size: 0.8rem;
+      color: var(--text-muted-custom);
+      margin-top: 0.75rem;
+    }
+
+    .upload-info i {
+      color: #adb5bd;
+    }
+
+    .btn-submit {
+      background-color: var(--navy);
+      border-color: var(--navy);
+      font-weight: 600;
+      font-size: 1rem;
+      padding: 0.75rem 1.5rem;
+      border-radius: 8px;
+    }
+
+    .btn-submit:hover,
+    .btn-submit:focus {
+      background-color: var(--navy-hover);
+      border-color: var(--navy-hover);
+    }
+
+    .security-note {
+      font-size: 0.78rem;
+      color: #adb5bd;
+      margin-top: 1.25rem;
+      margin-bottom: 0;
+    }
+
+    .security-note i {
+      font-size: 0.85rem;
+    }
+
+    #fileInput {
+      display: none;
+    }
+
+    .file-selected {
+      font-size: 0.85rem;
+      color: var(--navy);
+      margin-top: 0.5rem;
+      font-weight: 500;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="page-header">
+    <div class="container">
+      <div class="d-flex align-items-center text-center">
+        <i class="bi bi-fuel-pump header-icon"></i>
+        <div>
+          <h1>Comprovante de Abastecimento</h1>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Form -->
+  <main class="container pb-5 pt-5">
+    <div class="row justify-content-center">
+      <div class="col-12 col-lg-8 col-xl-7">
+        <div class="card form-card">
+          <div class="card-header-custom">
+            <div class="d-flex align-items-start gap-3">
+              <div class="card-header-icon">
+                <i class="bi bi-file-earmark-text"></i>
+              </div>
+              <div>
+                <h2>Formulário de Envio</h2>
+                <p>Preencha os dados abaixo e anexe a foto do comprovante.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="card-body-custom">
+            <form id="receiptForm" novalidate>
+              <!-- Nome do Motorista -->
+              <div class="mb-4">
+                <label for="driverName" class="form-label">
+                  Nome <span class="required">*</span>
+                </label>
+                <div class="input-group input-group-custom">
+                  <span class="input-group-text">
+                    <i class="bi bi-person"></i>
+                  </span>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="driverName"
+                    placeholder="Ex: SD PM Billy"
+                    required
+                  >
+                </div>
+              </div>
+
+              <!-- Prefixo do Veículo -->
+              <div class="mb-4">
+                <label for="vehiclePrefix" class="form-label">
+                  Prefixo da Viatura <span class="required">*</span>
+                </label>
+                <div class="input-group input-group-custom">
+                  <span class="input-group-text">
+                    <i class="bi bi-car-front"></i>
+                  </span>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="vehiclePrefix"
+                    placeholder="Ex: I-12000"
+                    required
+                  >
+                </div>
+              </div>
+
+              <!-- Comprovante de Abastecimento -->
+              <div class="mb-4">
+                <label class="form-label">
+                  Comprovante de Abastecimento <span class="required">*</span>
+                </label>
+                <input
+                  type="file"
+                  id="fileInput"
+                  accept=".jpg,.jpeg,.pdf"
+                  required
+                >
+                <label for="fileInput" class="upload-area d-block mb-0">
+                  <i class="bi bi-cloud-arrow-up upload-icon"></i>
+                  <span class="upload-link">Clique para selecionar o arquivo</span>
+                  <p class="upload-hint">Formatos aceitos: JPG, JPEG ou PDF</p>
+                  <p class="upload-hint">Tamanho máximo: 5MB</p>
+                </label>
+                <p id="fileName" class="file-selected d-none"></p>
+                <p class="upload-info mb-0">
+                  <i class="bi bi-info-circle me-1"></i>
+                  O arquivo deve ser uma foto nítida do comprovante.
+                </p>
+              </div>
+
+              <!-- Submit -->
+              <button type="submit" class="btn btn-primary btn-submit w-100">
+                <i class="bi bi-send me-2"></i>
+                Enviar Comprovante
+              </button>
+
+              <!-- <p class="security-note text-center">
+                <i class="bi bi-lock me-1"></i>
+                Seus dados estão seguros. Não compartilhamos suas informações.
+              </p> -->
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    const fileInput = document.getElementById('fileInput');
+    const fileName = document.getElementById('fileName');
+    const maxSize = 5 * 1024 * 1024;
+
+    fileInput.addEventListener('change', function () {
+      const file = this.files[0];
+      if (!file) {
+        fileName.classList.add('d-none');
+        return;
+      }
+
+      if (file.size > maxSize) {
+        Swal.fire({
+          title: "Tamanho do Arquivo Excedido",
+          text: "O arquivo excede o tamanho máximo de 5MB.",
+          icon: "warning"
+        });
+       
+        this.value = '';
+        fileName.classList.add('d-none');
+        return;
+      }
+
+      fileName.textContent = 'Arquivo selecionado: ' + file.name;
+      fileName.classList.remove('d-none');
+    });
+
+    document.getElementById('receiptForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      if (!this.checkValidity()) {
+        this.classList.add('was-validated');
+        return;
+      }
+      Swal.fire({
+        title: "Comprovante Enviado!",
+        text: "Protocolo: #12345678",
+        icon: "success"
+      });
+    
+    });
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</body>
+</html>
