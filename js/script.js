@@ -2,6 +2,9 @@
     const fileName = document.getElementById('fileName');
     const maxSize = 5 * 1024 * 1024;
 
+    console.log(fileInput);
+    console.log(fileName);
+
     fileInput.addEventListener('change', function () {
       const file = this.files[0];
       if (!file) {
@@ -39,12 +42,14 @@
     //   });
     
     // });
-document.getElementById('receiptForm').addEventListener('submit', async function (e) {
+ const URL_SCRIPT = "https://script.google.com/macros/s/AKfycbyjAt5_mNCEPT06RyC5CKwavmfVfLmJvZzRZk24qccmeHGpvSwTj7Z7jE3S-QUq-1132w/exec";
 
-    e.preventDefault();
+ document.getElementById('receiptForm').addEventListener('submit', async function (e) {
 
-    const nome = document.getElementById('nome').value.trim();
-    const prefixo = document.getElementById('prefixo').value.trim();
+   e.preventDefault();
+
+    const nome = document.getElementById('driverName').value.trim();
+    const prefixo = document.getElementById('vehiclePrefix').value.trim();
     const file = fileInput.files[0];
 
     if (!file) {
@@ -69,6 +74,29 @@ document.getElementById('receiptForm').addEventListener('submit', async function
             Swal.showLoading();
         }
     });
+
+    function converterArquivoParaBase64(file) {
+
+    return new Promise((resolve, reject) => {
+
+        const reader = new FileReader();
+
+        reader.onload = function () {
+
+            const base64 = reader.result.split(',')[1];
+
+            resolve(base64);
+        };
+
+        reader.onerror = function (error) {
+            reject(error);
+        };
+
+        reader.readAsDataURL(file);
+
+    });
+
+}
 
     try {
 
@@ -112,4 +140,4 @@ document.getElementById('receiptForm').addEventListener('submit', async function
 });
 
 
-    const URL_SCRIPT = "https://script.google.com/macros/s/AKfycbyjAt5_mNCEPT06RyC5CKwavmfVfLmJvZzRZk24qccmeHGpvSwTj7Z7jE3S-QUq-1132w/exec";
+   
