@@ -2,9 +2,6 @@
     const fileName = document.getElementById('fileName');
     const maxSize = 5 * 1024 * 1024;
 
-    console.log(fileInput);
-    console.log(fileName);
-
     fileInput.addEventListener('change', function () {
       const file = this.files[0];
       if (!file) {
@@ -28,21 +25,7 @@
       fileName.classList.remove('d-none');
     });
 
-    // document.getElementById('receiptForm').addEventListener('submit', function (e) {
-    //   e.preventDefault();
-
-    //   if (!this.checkValidity()) {
-    //     this.classList.add('was-validated');
-    //     return;
-    //   }
-    //   Swal.fire({
-    //     title: "Comprovante Enviado!",
-    //     text: "Protocolo: 12345678",
-    //     icon: "success"
-    //   });
-    
-    // });
- const URL_SCRIPT = "https://script.google.com/macros/s/AKfycbyjAt5_mNCEPT06RyC5CKwavmfVfLmJvZzRZk24qccmeHGpvSwTj7Z7jE3S-QUq-1132w/exec";
+ const URL_SCRIPT = "https://script.google.com/macros/s/AKfycbzWebnIlB2GMurijGTraEOa1YeOVsb7EB3lmFjWRWy1jgLsdHg-Ab1WHOxfVKK6db_cQg/exec";
 
  document.getElementById('receiptForm').addEventListener('submit', async function (e) {
 
